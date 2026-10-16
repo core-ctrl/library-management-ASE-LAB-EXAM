@@ -42,6 +42,17 @@ class Library:
                 print(f"  -> Found: [{isbn}] {details['title']} by {details['author']}")
         return results
 
+    def borrow_book(self, isbn):
+        # Feature: Express 7-day borrowing policy
+        loan_period_days = 7
+        late_fee_per_day = 10
+        if isbn in self.books and self.books[isbn]["available"]:
+            self.books[isbn]["available"] = False
+            print(f"[BORROW-EXPRESS] Borrowed '{self.books[isbn]['title']}'. Due in {loan_period_days} days. Late fine: Rs.{late_fee_per_day}/day.")
+            return True
+        print(f"[BORROW-EXPRESS] Book [{isbn}] is not available.")
+        return False
+
 
 if __name__ == "__main__":
     lib = Library()
